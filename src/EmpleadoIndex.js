@@ -6,19 +6,19 @@ const ClienteIndex = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (loginEmpleado === "false") {
+        if (loginEmpleado === "") {
             navigate("/");  // Redirige a la página raíz si no se ha iniciado sesión
         }
     }, [loginEmpleado, navigate]);
 
     const handleLogout = () => {
-        sessionStorage.setItem('LoginEmpleado', "false");
+        sessionStorage.setItem('LoginEmpleado', "");
         navigate("/");  // Redirige al usuario a la página de inicio
     };
 
     return (
         <>
-            Empleado<br/>
+            Empleado({loginEmpleado})<br/>
             <Link to="/" onClick={handleLogout}>Cerrar sesi&oacute;n</Link>
         </>
     );

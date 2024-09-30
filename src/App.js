@@ -6,6 +6,17 @@ import ClienteIndex from "./ClienteIndex";
 import EmpleadoIndex from "./EmpleadoIndex";  // Asegúrate de tener este componente
 
 const App = () => {
+    useEffect(() => {
+        // Solo inicializa si no existe
+        if (sessionStorage.getItem('LoginCliente') === null) {
+            sessionStorage.setItem('LoginCliente', "");
+            sessionStorage.setItem('LoginCliente', "");
+        }
+        if (sessionStorage.getItem('LoginEmpleado') === null) {
+            sessionStorage.setItem('LoginEmpleado', "");
+            sessionStorage.setItem('LoginEmpleado', "");
+        }
+    }, []);
   return (
       <Routes>
         <Route path="/" element={<Login />} />
