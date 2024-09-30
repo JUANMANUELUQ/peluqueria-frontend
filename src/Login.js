@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import "./formulario.css";
 
 const Login = () => {
     const [inputs, setInputs] = useState({});
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -14,6 +15,15 @@ const Login = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         alert(JSON.stringify(inputs));
+        if (inputs.correo=="1") {
+            sessionStorage.setItem('LoginCliente', inputs.correo);
+            alert("Login: "+sessionStorage.getItem('LoginCliente'));
+            navigate("/ClienteIndex");
+        }
+        if (inputs.correo=="2") {
+            sessionStorage.setItem('LoginEmpleado', inputs.correo);
+            navigate("/EmpleadoIndex");
+        }
     }
 
     const divLoginStyle = {
