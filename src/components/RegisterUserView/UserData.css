@@ -1,0 +1,116 @@
+.BackgroundB2{
+    width: 50%;
+    height: 100vh;
+    background: linear-gradient(#FFFFFF, #E7E7E7);
+}
+.BackgroundB21{
+    width: 90%;
+    height: 15cm;
+    background: linear-gradient(#F7F7F7, #F5F5F5);
+    margin-top: 70px;
+    margin-right: 70px;
+    margin-bottom: 70px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+}
+.titlePage3{
+    font-family: "Bigshot One", serif;
+    font-weight: 400;
+    font-size: 27px;
+    margin-left: 80px;
+    padding-top: 90px;
+    color: #000000;
+}
+.label{
+    font-family: "Abel", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 29px;
+}
+.inputRegisterBox {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas del mismo tamaño */
+    gap: 20px; /* Espacio entre las cajas */
+}
+
+.boxL{
+    margin-left: 85px;
+}
+
+.boxR{
+    margin-left: 20px;
+    margin-right: 80px;
+}
+
+.registerBox {
+    display: flex;
+    flex-direction: column;
+    margin-top: 17px;
+    color: #717171;
+    gap: 10px;
+    input{
+        border-radius: 5px;
+        border-color: #717171;
+        border-width: 1px;
+        height: 32px;
+        width: 225px;
+
+    }
+}
+
+.registerButton{
+    width: 93%;
+    height: 30px;
+    margin-top: 15px;
+    border-radius: 5px;
+    border-width: 0;
+    background-color: #002D81;
+    font-family: "Bigshot One", serif;
+    font-size: 20px;
+    color: #fff7f7;
+}
+
+.registerButton:hover{
+    background-color: #0741AD;
+    animation: ease-in-out;
+}
+
+.continueGoogle {
+    display: flex;
+    align-items: center; /* Alinea verticalmente el ícono y el texto */
+    justify-content: center; /* Centra el ícono y el texto horizontalmente */
+    width: 99%; /* Ancho del botón */
+    height: 30px; /* Alto del botón */
+    background-color: #FFFFFF;
+    margin-top: 15px; /* Margen superior */
+    border-radius: 5px; /* Bordes redondeados */
+    border-color: #717171;
+    border-width: 1px; /* Grosor del borde */
+    font-family: "Abel", sans-serif; /* Fuente Abel */
+    font-weight: 400; /* Grosor de la fuente */
+    font-style: normal; /* Estilo de la fuente */
+    color: #717171; /* Color del texto */
+    cursor: pointer; /* Cambia el cursor cuando pasa sobre el botón */
+}
+
+.continueGoogle svg {
+    margin-right: 8px; /* Espacio entre el ícono y el texto */
+}
+
+.continueGoogle:hover {
+    background-color: #F5F5F5;
+    animation: ease-in-out;
+}
+
+.haveAnAccount{
+    font-family: "Abel", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 13px;
+    color: #717171;
+    margin-top: 20px;
+    margin-left: 40px;
+}
+.haveAnAccount:hover{
+    color: #002D81;
+    cursor: pointer;
+}
