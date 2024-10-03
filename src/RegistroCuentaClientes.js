@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "./formulario.css";
 
 const RegistroCuentaClientes = () => {
     const [inputs, setInputs] = useState({});
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -11,9 +12,51 @@ const RegistroCuentaClientes = () => {
         setInputs(values => ({...values, [name]: value}))
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        alert(JSON.stringify(inputs));
+
+        try {
+            // Verificar si el cliente ya existe
+            const responseExist = await fetch("http://localhost:8080/api/RegistroCuentaCliente/exist", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: inputs.nombre,
+                    email: inputs.correo,
+                }),
+            });
+
+            const exists = await responseExist.json();
+
+            if (exists) {
+                alert("Ya existe una cuenta con ese correo o nombre");
+            } else {
+                // Si no existe, crear la nueva cuenta
+                const responseCreate = await fetch("http://localhost:8080/api/RegistroCuentaCliente/create", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        name: inputs.nombre,
+                        email: inputs.correo,
+                        password: inputs.contrasenia,
+                    }),
+                });
+
+                if (responseCreate.ok) {
+                    alert("Cuenta creada con exito.");
+                    navigate("/"); // Redirigir al login o a otra página
+                } else {
+                    alert("Error al crear la cuenta.");
+                }
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Ocurrio un error.");
+        }
     }
 
     const divLoginStyle = {

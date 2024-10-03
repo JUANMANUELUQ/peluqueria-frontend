@@ -12,19 +12,63 @@ const Login = () => {
         setInputs(values => ({...values, [name]: value}))
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        alert(JSON.stringify(inputs));
-        if (inputs.correo=="1") {
-            sessionStorage.setItem('LoginCliente', inputs.correo);
-            alert("Login: "+sessionStorage.getItem('LoginCliente'));
-            navigate("/ClienteIndex");
+
+        try {
+            const response = await fetch("http://localhost:8080/api/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: inputs.correo,
+                    password: inputs.contrasenia,
+                }),
+            });
+
+            if (!response.ok) {
+                // Si el servidor devuelve un error (401, 400, etc.)
+                alert("Credenciales incorrectas o problema en el servidor.");
+                return;
+            }
+
+            // Verificar si la respuesta tiene cuerpo antes de convertirla a JSON
+            const responseText = await response.text();
+            if (!responseText) {
+                alert("Cuenta no encontrada.");
+                return;
+            }
+
+            const account = JSON.parse(responseText);  // Convertir el texto a JSON
+
+            // Verificar si el account es null o undefined
+            if (!account) {
+                alert("Cuenta no encontrada.");
+                return;
+            }
+
+            // Si el account no es null, redirigir según el tipo de cuenta
+            sessionStorage.setItem("Login", account.email);
+
+            if (account.accountType === "CLIENT") {
+                sessionStorage.setItem('LoginCliente', inputs.correo);
+                navigate("/ClienteIndex");
+            } else if (account.accountType === "WORKER") {
+                sessionStorage.setItem('LoginEmpleado', inputs.correo);
+                navigate("/EmpleadoIndex");
+            } else if (account.accountType === "ADMIN") {
+                sessionStorage.setItem('LoginAdmin', inputs.correo);
+                navigate("/AdminIndex");
+            }
+        } catch (error) {
+            console.error("Error en el login:", error);
+            alert("Ocurrió un error durante el login.");
         }
-        if (inputs.correo=="2") {
-            sessionStorage.setItem('LoginEmpleado', inputs.correo);
-            navigate("/EmpleadoIndex");
-        }
-    }
+    };
+
+
+
 
     const divLoginStyle = {
         margin:"auto",

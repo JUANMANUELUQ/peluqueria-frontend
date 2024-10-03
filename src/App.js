@@ -3,7 +3,8 @@ import { Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import RegistroCuentaClientes from './RegistroCuentaClientes';
 import ClienteIndex from "./ClienteIndex";
-import EmpleadoIndex from "./EmpleadoIndex";  // Asegúrate de tener este componente
+import EmpleadoIndex from "./EmpleadoIndex";
+import AdminIndex from "./AdminIndex";  // Asegúrate de tener este componente
 
 const App = () => {
     useEffect(() => {
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/RegistroCuentaClientes" element={<RegistroCuentaClientes />} />
           <Route path="/ClienteIndex" element={<ClienteIndex />} />
           <Route path="/EmpleadoIndex" element={<EmpleadoIndex />} />
+          <Route path="/AdminIndex" element={<AdminIndex />} />
       </Routes>
   );
 };

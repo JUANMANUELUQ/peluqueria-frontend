@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import {useEffect} from "react";
 
-const ClienteIndex = () => {
-    const loginCliente = sessionStorage.getItem('LoginCliente');
+const AdminIndex = () => {
+    const loginCliente = sessionStorage.getItem('LoginAdmin');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -12,16 +12,16 @@ const ClienteIndex = () => {
     }, [loginCliente, navigate]);
 
     const handleLogout = () => {
-        sessionStorage.setItem('LoginCliente', "");
+        sessionStorage.setItem('LoginAdmin', "");
         navigate("/");  // Redirige al usuario a la página de inicio
     };
 
     return (
         <>
-            Cliente({loginCliente})<br/>
+            Administrador({loginCliente})<br/>
             <Link to="/" onClick={handleLogout}>Cerrar sesi&oacute;n</Link>
         </>
     );
 }
 
-export default ClienteIndex;
+export default AdminIndex;
