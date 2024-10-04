@@ -54,7 +54,7 @@ const ProductForm = () => {
             }
 
             //const result = await response.json();
-            console.log("Producto registrado:", result);
+            //console.log("Producto registrado:", result);
 
             // Actualiza los productos después de agregar uno nuevo
             fetchProducts();
