@@ -18,11 +18,13 @@ const ProductForm = () => {
                 throw new Error("Error al obtener los productos");
             }
             const data = await response.json();
+            console.log("Productos obtenidos:", data); // Log para verificar si los productos están llegando correctamente
             setProducts(data);
         } catch (error) {
             console.error("Error:", error);
         }
     };
+
 
     // Hook para cargar los productos cuando la página se carga
     useEffect(() => {
@@ -36,7 +38,7 @@ const ProductForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const newProduct = { name: productName, quantity, price: unitPrice };// Verifica que los nombres coincidan con los que espera tu backend
+        const newProduct = { productName, quantity, unitPrice };
 
         try {
             const response = await fetch("http://localhost:8080/api/products/register", {
@@ -54,8 +56,8 @@ const ProductForm = () => {
             const result = await response.json();
             console.log("Producto registrado:", result);
 
-            // Actualizar productos después de registrar uno nuevo
-            await fetchProducts();
+            // Actualiza los productos después de agregar uno nuevo
+            fetchProducts();
 
             // Limpiar los campos
             setProductName("");
