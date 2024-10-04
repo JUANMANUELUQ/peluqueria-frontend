@@ -4,7 +4,8 @@ import Login from './Login';
 import RegistroCuentaClientes from './RegistroCuentaClientes';
 import ClienteIndex from "./ClienteIndex";
 import EmpleadoIndex from "./EmpleadoIndex";
-import AdminIndex from "./AdminIndex";  // Asegúrate de tener este componente
+import AdminIndex from "./AdminIndex";
+import ProductForm from "./components/RegisterProductView/ProductForm";// Asegúrate de tener este componente
 
 const App = () => {
     useEffect(() => {
@@ -20,11 +21,13 @@ const App = () => {
     }, []);
   return (
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/RegistroCuentaClientes" element={<RegistroCuentaClientes />} />
+          {/* Rutas definidas sin anidación */}
+          <Route path="/" element={<Login />} />
+          <Route path="/RegistroCuentaClientes" element={<RegistroCuentaClientes />} />
           <Route path="/ClienteIndex" element={<ClienteIndex />} />
           <Route path="/EmpleadoIndex" element={<EmpleadoIndex />} />
           <Route path="/AdminIndex" element={<AdminIndex />} />
+          <Route path="/ProductForm" element={<ProductForm />} /> {/* Nueva ruta para ProductForm */}
       </Routes>
   );
 };
