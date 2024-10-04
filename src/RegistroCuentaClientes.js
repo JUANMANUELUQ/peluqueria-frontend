@@ -17,7 +17,7 @@ const RegistroCuentaClientes = () => {
 
         try {
             // Verificar si el cliente ya existe
-            const responseExist = await fetch("http://localhost:8080/api/RegistroCuentaCliente/exist", {
+            const responseExist = await fetch("http://localhost:8080/api/account/exist", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -34,7 +34,7 @@ const RegistroCuentaClientes = () => {
                 alert("Ya existe una cuenta con ese correo o nombre");
             } else {
                 // Si no existe, crear la nueva cuenta
-                const responseCreate = await fetch("http://localhost:8080/api/RegistroCuentaCliente/create", {
+                const responseCreate = await fetch("http://localhost:8080/api/account/create", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
