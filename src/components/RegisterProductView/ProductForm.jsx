@@ -17,13 +17,23 @@ const ProductForm = () => {
             if (!response.ok) {
                 throw new Error("Error al obtener los productos");
             }
-            const data = await response.json();
-            console.log("Productos obtenidos:", data); // Log para verificar si los productos están llegando correctamente
-            setProducts(data);
+            const responseData = await response.json();
+
+            if (responseData.error) {
+                throw new Error("Error del servidor al obtener los productos");
+            }
+
+            // Asegurarse de que `reply` siempre sea un arreglo
+            const products = responseData.reply || [];
+            console.log("Productos obtenidos:", products);
+            setProducts(products);
         } catch (error) {
             console.error("Error:", error);
+            // Si ocurre un error, se asegura de que products sea un arreglo vacío para evitar problemas en el renderizado
+            setProducts([]);
         }
     };
+
 
 
     // Hook para cargar los productos cuando la página se carga
@@ -37,9 +47,9 @@ const ProductForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
+    
         const newProduct = { productName, quantity, unitPrice };
-
+    
         try {
             const response = await fetch("http://localhost:8080/api/products/register", {
                 method: "POST",
@@ -48,17 +58,23 @@ const ProductForm = () => {
                 },
                 body: JSON.stringify(newProduct),
             });
-
+    
             if (!response.ok) {
-                throw new Error("Error al registrar el producto");
+                const errorData = await response.json(); // Obtener el cuerpo con el mensaje de error
+                throw new Error(errorData.reply || "Error al registrar el producto");
             }
-
-            //const result = await response.json();
-            //console.log("Producto registrado:", result);
-
+    
+            const responseData = await response.json();
+    
+            if (responseData.error) {
+                throw new Error(`Error del servidor: ${responseData.reply}`);
+            }
+    
+            console.log("Producto registrado:", responseData.reply);
+    
             // Actualiza los productos después de agregar uno nuevo
             fetchProducts();
-
+    
             // Limpiar los campos
             setProductName("");
             setQuantity(1);
@@ -68,6 +84,7 @@ const ProductForm = () => {
             console.error("Error:", error);
         }
     };
+    
 
     const handleDelete = (index) => {
         const updatedProducts = products.filter((_, i) => i !== index);
