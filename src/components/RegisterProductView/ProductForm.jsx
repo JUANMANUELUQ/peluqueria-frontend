@@ -53,7 +53,7 @@ const ProductForm = () => {
                 throw new Error("Error al registrar el producto");
             }
 
-            const result = await response.json();
+            //const result = await response.json();
             console.log("Producto registrado:", result);
 
             // Actualiza los productos después de agregar uno nuevo
