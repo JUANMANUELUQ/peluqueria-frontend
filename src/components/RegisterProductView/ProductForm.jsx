@@ -13,7 +13,7 @@ const ProductForm = () => {
     // Función para obtener los productos desde el backend
     const fetchProducts = async () => {
         try {
-            const response = await fetch("http://localhost:8080/api/products/get_all");
+            const response = await fetch("http://localhost:8080/api/products/get-all");
             if (!response.ok) {
                 throw new Error("Error al obtener los productos");
             }
