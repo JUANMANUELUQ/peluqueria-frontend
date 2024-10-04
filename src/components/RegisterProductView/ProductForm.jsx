@@ -26,7 +26,7 @@ const ProductForm = () => {
 
     // Hook para cargar los productos cuando la página se carga
     useEffect(() => {
-        fetchProducts();
+        fetchProducts(); // Asegúrate de que esta función se esté ejecutando
     }, []);
 
     const handleQuantityChange = (increment) => {
@@ -36,7 +36,7 @@ const ProductForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const newProduct = { productName, quantity, unitPrice };
+        const newProduct = { productName, quantity, unitPrice }; // Verifica que los nombres coincidan con los que espera tu backend
 
         try {
             const response = await fetch("http://localhost:8080/api/products/register", {
