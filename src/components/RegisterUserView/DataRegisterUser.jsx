@@ -25,7 +25,7 @@ function DataRegisterUser() {
                         <style>
                             @import url('https://fonts.googleapis.com/css2?family=Bigshot+One&display=swap');
                         </style>
-                        Create an account
+                        Crear cuenta
                     </h2>
                     <div className="inputRegisterBox">
                         <style>
@@ -34,7 +34,7 @@ function DataRegisterUser() {
                         </style>
                         <div className="boxL">
                             <div className="registerBox">
-                                <label className="fullName">Full Name:</label>
+                                <label className="fullName">Nombre completo:</label>
                                 <input
                                     type="text"
                                     required="required"
@@ -43,7 +43,7 @@ function DataRegisterUser() {
                                 />
                             </div>
                             <div className="registerBox">
-                                <label className="address">Address:</label>
+                                <label className="address">Direcci&oacute;n:</label>
                                 <input
                                     type="text"
                                     required="required"
@@ -52,7 +52,7 @@ function DataRegisterUser() {
                                 />
                             </div>
                             <div className="registerBox">
-                                <label className="password">Password</label>
+                                <label className="password">Contrase&ntilde;a</label>
                                 <input
                                     type="text"
                                     required="required"
@@ -79,7 +79,7 @@ function DataRegisterUser() {
                                 />
                             </div>
                             <div className="registerBox">
-                                <label className="number">Phone Number:</label>
+                                <label className="number">N&uacute;mero de tel&eacute;fono:</label>
                                 <input
                                     type="text"
                                     required="required"

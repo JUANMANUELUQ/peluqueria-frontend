@@ -5,7 +5,9 @@ import RegistroCuentaClientes from './RegistroCuentaClientes';
 import ClienteIndex from "./ClienteIndex";
 import EmpleadoIndex from "./EmpleadoIndex";
 import AdminIndex from "./AdminIndex";
-import ProductForm from "./components/RegisterProductView/ProductForm";// Asegúrate de tener este componente
+import ProductForm from "./components/RegisterProductView/ProductForm";
+import {RegistroUsuario} from "./pages/registerUser/RegistroUsuario";
+// Asegúrate de tener este componente
 
 const App = () => {
     useEffect(() => {
@@ -24,6 +26,7 @@ const App = () => {
           {/* Rutas definidas sin anidación */}
           <Route path="/" element={<Login />} />
           <Route path="/RegistroCuentaClientes" element={<RegistroCuentaClientes />} />
+          <Route path="/RegistroUsuario" element={<RegistroUsuario />} />
           <Route path="/ClienteIndex" element={<ClienteIndex />} />
           <Route path="/EmpleadoIndex" element={<EmpleadoIndex />} />
           <Route path="/AdminIndex" element={<AdminIndex />} />

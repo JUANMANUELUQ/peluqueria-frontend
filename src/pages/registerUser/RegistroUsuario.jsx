@@ -1,16 +1,16 @@
 import {BaseLog} from "../../components/BaseLog";
-import {DataRegisterUser} from "../../components/RegisterUserView/DataRegisterUser";
+import {RegistroUsuarioDatos} from "../../components/RegisterUserView/RegistroUsuarioDatos";
 
-function RegisterUser() {
+function RegistroUsuario() {
     return (
         <BaseLog
             PAGETITLE="Registro"
             PAGEDESCRIPTION="Transformamos tu estilo,"
             PAGEDESCRIPTION2="realzamos tu belleza"
-            COMPONENT={DataRegisterUser}
+            COMPONENT={RegistroUsuarioDatos}
         />
 
     );
 }
 
-export {RegisterUser};
+export {RegistroUsuario};

@@ -8,12 +8,14 @@ import { BrowserRouter } from 'react-router-dom';
 import { RegisterUser } from './pages/registerUser/RegisterUser';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 /**
 root.render(
     <React.StrictMode>
         <RegisterUser />
     </React.StrictMode>
-);*/
+);
+**/
 
 
 root.render(

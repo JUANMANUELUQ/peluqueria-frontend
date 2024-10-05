@@ -90,18 +90,20 @@ const Login = () => {
             <div style={divLoginStyle}>
                 <form onSubmit={handleSubmit}>
                     <div style={subDivLogin}>
-                        Nombre:<br/>
-                        <input type="text" name="correo" value={inputs.correo} onChange={handleChange}/>
+                        Correo electr&oacute;nico:<br/>
+                        <input type="email" name="correo" required="required"
+                               value={inputs.correo} onChange={handleChange}/>
                     </div>
                     <div style={subDivLogin}>
                         Contrase&ntilde;a:<br/>
-                        <input type="password" name="contrasenia" value={inputs.contrasenia} onChange={handleChange}/>
+                        <input type="password" name="contrasenia" required="required"
+                               value={inputs.contrasenia} onChange={handleChange}/>
                     </div>
                     <div style={subDivLogin}>
                         <input type="submit" value="Iniciar sesi&oacute;n"/>
                     </div>
                     <div style={subDivLogin}>
-                        <Link to="/RegistroCuentaClientes">Reg&iacute;strate aqu&iacute;</Link>
+                        <Link to="/RegistroUsuario">Reg&iacute;strate aqu&iacute;</Link>
                     </div>
                 </form>
             </div>
