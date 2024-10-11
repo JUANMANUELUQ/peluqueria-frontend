@@ -1,3 +1,4 @@
+
 import React, {useEffect} from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Login from './Login';
@@ -36,3 +37,19 @@ const App = () => {
 };
 
 export default App;
+
+/**
+ * import React from 'react';
+ * import './App.css'; // Importa tus estilos globales
+ * import AppointmentBooking from './components/AppointmentBooking'; // Ajusta la ruta según tu estructura de proyecto
+ *
+ * function App() {
+ *   return (
+ *     <div className="App">
+ *       <AppointmentBooking />
+ *     </div>
+ *   );
+ * }
+ *
+ * export default App;
+ */

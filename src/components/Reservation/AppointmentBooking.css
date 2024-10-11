@@ -1,0 +1,77 @@
+.backL {
+    display: flex;
+    justify-content: center;
+}
+
+.BackgroundB2 {
+    width: 50%;
+    height: 100vh;
+    background: linear-gradient(#FFFFFF, #E7E7E7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.BackgroundB21 {
+    width: 90%;
+    height: auto;
+    background: linear-gradient(#F7F7F7, #F5F5F5);
+    margin: 70px;
+    padding: 20px;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.titlePage3 {
+    font-family: "Bigshot One", serif;
+    font-weight: 400;
+    font-size: 27px;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 30px;
+}
+
+.inputRegisterBox {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.registerBox {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.label {
+    font-family: "Abel", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+input, select {
+    border-radius: 5px;
+    border: 1px solid #717171;
+    height: 32px;
+    width: 100%;
+    padding: 5px;
+}
+
+.registerButton {
+    width: 100%;
+    height: 40px;
+    margin-top: 20px;
+    border-radius: 5px;
+    border-width: 0;
+    background-color: #002D81;
+    font-family: "Bigshot One", serif;
+    font-size: 20px;
+    color: #fff7f7;
+    cursor: pointer;
+}
+
+.registerButton:hover {
+    background-color: #0741AD;
+    animation: ease-in-out;
+}
