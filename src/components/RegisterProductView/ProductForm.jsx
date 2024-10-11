@@ -10,6 +10,7 @@ const ProductForm = () => {
     const [unitPrice, setUnitPrice] = useState("");
     const [products, setProducts] = useState([]);
     const [selectedProductIndex, setSelectedProductIndex] = useState(null);
+    const [isEditMode, setIsEditMode] = useState(false); // Nuevo estado para verificar si es modo edición
 
     // Función para obtener los productos desde el backend
     const fetchProducts = async () => {
@@ -24,51 +25,40 @@ const ProductForm = () => {
                 throw new Error("Error del servidor al obtener los productos");
             }
 
-            // Asegurarse de que `reply` siempre sea un arreglo
             const products = responseData.reply || [];
             console.log("Productos obtenidos:", products);
             setProducts(products);
         } catch (error) {
             console.error("Error:", error);
-            // Si ocurre un error, se asegura de que products sea un arreglo vacío para evitar problemas en el renderizado
             setProducts([]);
         }
     };
 
-
-
-    // Hook para cargar los productos cuando la página se carga
     useEffect(() => {
-        fetchProducts(); // Asegúrate de que esta función se esté ejecutando
+        fetchProducts();
     }, []);
 
     const handleQuantityChange = (increment) => {
-        setQuantity(prevQuantity => Math.max(1, prevQuantity + increment)); // Evita que sea menor que 1
+        setQuantity(prevQuantity => Math.max(1, prevQuantity + increment));
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
     
-        const updatedProduct = { id, productName, quantity, unitPrice };
-    
+        const newProduct = { productName, quantity, unitPrice };
+        
         try {
-            const url = selectedProductIndex !== null
-                ? "http://localhost:8080/api/products/update"
-                : "http://localhost:8080/api/products/register";
-            
-            const method = selectedProductIndex !== null ? "PUT" : "POST";
-            
-            const response = await fetch(url, {
-                method: method,
+            const response = await fetch("http://localhost:8080/api/products/register", {
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(updatedProduct),
+                body: JSON.stringify(newProduct),
             });
     
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.reply || "Error al registrar o actualizar el producto");
+                throw new Error(errorData.reply || "Error al registrar el producto");
             }
     
             const responseData = await response.json();
@@ -77,22 +67,55 @@ const ProductForm = () => {
                 throw new Error(`Error del servidor: ${responseData.reply}`);
             }
     
-            console.log("Producto registrado o actualizado:", responseData.reply);
+            console.log("Producto registrado:", responseData.reply);
     
-            // Refrescar la lista de productos
             fetchProducts();
-    
-            // Limpiar los campos
-            setId("");
             setProductName("");
             setQuantity(1);
             setUnitPrice("");
-            setSelectedProductIndex(null);
         } catch (error) {
             console.error("Error:", error);
         }
     };
-    
+
+    // Nuevo método para manejar la actualización de productos
+    const handleUpdate = async (event) => {
+        event.preventDefault();
+
+        const updatedProduct = { id, productName, quantity, unitPrice };
+
+        try {
+            const response = await fetch(`http://localhost:8080/api/products/update`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updatedProduct),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.reply || "Error al actualizar el producto");
+            }
+
+            const responseData = await response.json();
+
+            if (responseData.error) {
+                throw new Error(`Error del servidor: ${responseData.reply}`);
+            }
+
+            console.log("Producto actualizado:", responseData.reply);
+
+            fetchProducts();
+            setProductName("");
+            setQuantity(1);
+            setUnitPrice("");
+            setIsEditMode(false); // Volver al modo de agregar
+            setId("");
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
 
     const handleDelete = (index) => {
         const updatedProducts = products.filter((_, i) => i !== index);
@@ -105,18 +128,13 @@ const ProductForm = () => {
         setProductName(product.productName);
         setQuantity(product.quantity);
         setUnitPrice(product.unitPrice);
-        setSelectedProductIndex(index);
+        setIsEditMode(true); // Cambiar a modo edición
     };
 
     return (
         <Box className="container">
-            {/* Formulario a la izquierda */}
-            <Box
-                component="form"
-                onSubmit={handleSubmit}
-                className="formContainer"
-            >
-                <Typography variant="h5" gutterBottom>Registrar Producto</Typography>
+            <Box component="form" onSubmit={isEditMode ? handleUpdate : handleSubmit} className="formContainer">
+                <Typography variant="h5" gutterBottom>{isEditMode ? "Actualizar Producto" : "Registrar Producto"}</Typography>
 
                 <TextField
                     fullWidth
@@ -159,8 +177,28 @@ const ProductForm = () => {
                     required
                 />
 
-                <Button variant="contained" color="primary" type="submit" fullWidth sx={{ marginTop: 2 }}>
-                    {selectedProductIndex !== null ? "Actualizar Producto" : "Registrar Producto"}
+                {/* Botón para registrar */}
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleSubmit}
+                    fullWidth
+                    sx={{ marginTop: 2 }}
+                    disabled={isEditMode}
+                >
+                    Registrar Producto
+                </Button>
+
+                {/* Botón para actualizar */}
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleUpdate}
+                    fullWidth
+                    sx={{ marginTop: 2 }}
+                    disabled={!isEditMode}
+                >
+                    Actualizar Producto
                 </Button>
             </Box>
 
