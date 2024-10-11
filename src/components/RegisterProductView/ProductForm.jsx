@@ -4,6 +4,7 @@ import { Add, Remove } from '@mui/icons-material';
 import './ProductForm.css';
 
 const ProductForm = () => {
+    const [id, setId] = useState("");
     const [productName, setProductName] = useState("");
     const [quantity, setQuantity] = useState(1);
     const [unitPrice, setUnitPrice] = useState("");
@@ -160,6 +161,7 @@ const ProductForm = () => {
                 <Table>
                     <TableHead>
                         <TableRow>
+                            <TableCell>ID producto</TableCell>
                             <TableCell>Nombre del Producto</TableCell>
                             <TableCell>Cantidad</TableCell>
                             <TableCell>Precio por Unidad</TableCell>
@@ -169,6 +171,7 @@ const ProductForm = () => {
                     <TableBody>
                         {products.map((product, index) => (
                             <TableRow key={index}>
+                                <TableCell>{product.id}</TableCell>
                                 <TableCell>{product.productName}</TableCell>
                                 <TableCell>{product.quantity}</TableCell>
                                 <TableCell>${product.unitPrice}</TableCell>
