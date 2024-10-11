@@ -131,6 +131,14 @@ const ProductForm = () => {
         setIsEditMode(true); // Cambiar a modo edición
     };
 
+    const handleFields = () => {
+        setId("");
+        setProductName("");
+        setQuantity(1);
+        setUnitPrice("");
+        setIsEditMode(false);
+    };
+
     return (
         <Box className="container">
             <Box component="form" onSubmit={isEditMode ? handleUpdate : handleSubmit} className="formContainer">
@@ -200,6 +208,13 @@ const ProductForm = () => {
                 >
                     Actualizar Producto
                 </Button>
+                
+                {/* Nuevo botón para limpiar los campos */}
+                <Box display="flex" justifyContent="flex-end" sx={{ marginTop: 2 }}>
+                    <Button variant="outlined" color="secondary" onClick={handleFields}>
+                        Limpiar Campos
+                    </Button>
+                </Box>
             </Box>
 
             {/* Tabla a la derecha */}
