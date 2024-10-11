@@ -70,9 +70,7 @@ const ProductForm = () => {
             console.log("Producto registrado:", responseData.reply);
     
             fetchProducts();
-            setProductName("");
-            setQuantity(1);
-            setUnitPrice("");
+            handleFields();
         } catch (error) {
             console.error("Error:", error);
         }
@@ -107,11 +105,7 @@ const ProductForm = () => {
             console.log("Producto actualizado:", responseData.reply);
 
             fetchProducts();
-            setProductName("");
-            setQuantity(1);
-            setUnitPrice("");
-            setIsEditMode(false); // Volver al modo de agregar
-            setId("");
+            handleFields();
         } catch (error) {
             console.error("Error:", error);
         }
