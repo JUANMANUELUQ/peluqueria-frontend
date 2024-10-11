@@ -111,10 +111,11 @@ const ProductForm = () => {
         }
     };
 
-    const handleDelete = async (id) => {
+    const handleDelete = async (index) => {
         const confirmDelete = window.confirm("¿Está seguro de que desea eliminar este producto?");
         if (confirmDelete) {
             try {
+                const id = products[index].id; // Obtener el id del producto desde el índice
                 const response = await fetch(`http://localhost:8080/api/products/delete/${id}`, {
                     method: "DELETE",
                 });
@@ -125,6 +126,7 @@ const ProductForm = () => {
 
                 console.log("Producto eliminado:", id);
                 fetchProducts();
+                handleFields();
             } catch (error) {
                 console.error("Error al eliminar el producto:", error);
             }
