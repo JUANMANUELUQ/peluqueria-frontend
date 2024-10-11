@@ -111,9 +111,24 @@ const ProductForm = () => {
         }
     };
 
-    const handleDelete = (index) => {
-        const updatedProducts = products.filter((_, i) => i !== index);
-        setProducts(updatedProducts);
+    const handleDelete = async (id) => {
+        const confirmDelete = window.confirm("¿Está seguro de que desea eliminar este producto?");
+        if (confirmDelete) {
+            try {
+                const response = await fetch(`http://localhost:8080/api/products/delete/${id}`, {
+                    method: "DELETE",
+                });
+
+                if (!response.ok) {
+                    throw new Error("Error al eliminar el producto");
+                }
+
+                console.log("Producto eliminado:", id);
+                fetchProducts();
+            } catch (error) {
+                console.error("Error al eliminar el producto:", error);
+            }
+        }
     };
 
     const handleEdit = (index) => {
