@@ -49,20 +49,26 @@ const ProductForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
     
-        const newProduct = { productName, quantity, unitPrice };
+        const updatedProduct = { id, productName, quantity, unitPrice };
     
         try {
-            const response = await fetch("http://localhost:8080/api/products/register", {
-                method: "POST",
+            const url = selectedProductIndex !== null
+                ? "http://localhost:8080/api/products/update"
+                : "http://localhost:8080/api/products/register";
+            
+            const method = selectedProductIndex !== null ? "PUT" : "POST";
+            
+            const response = await fetch(url, {
+                method: method,
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(newProduct),
+                body: JSON.stringify(updatedProduct),
             });
     
             if (!response.ok) {
-                const errorData = await response.json(); // Obtener el cuerpo con el mensaje de error
-                throw new Error(errorData.reply || "Error al registrar el producto");
+                const errorData = await response.json();
+                throw new Error(errorData.reply || "Error al registrar o actualizar el producto");
             }
     
             const responseData = await response.json();
@@ -71,12 +77,13 @@ const ProductForm = () => {
                 throw new Error(`Error del servidor: ${responseData.reply}`);
             }
     
-            console.log("Producto registrado:", responseData.reply);
+            console.log("Producto registrado o actualizado:", responseData.reply);
     
-            // Actualiza los productos después de agregar uno nuevo
+            // Refrescar la lista de productos
             fetchProducts();
     
             // Limpiar los campos
+            setId("");
             setProductName("");
             setQuantity(1);
             setUnitPrice("");
@@ -94,6 +101,7 @@ const ProductForm = () => {
 
     const handleEdit = (index) => {
         const product = products[index];
+        setId(product.id);
         setProductName(product.productName);
         setQuantity(product.quantity);
         setUnitPrice(product.unitPrice);
