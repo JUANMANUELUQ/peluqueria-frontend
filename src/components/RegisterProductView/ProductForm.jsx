@@ -44,9 +44,9 @@ const ProductForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-    
+
         const newProduct = { productName, quantity, unitPrice };
-        
+
         try {
             const response = await fetch("http://localhost:8080/api/products/register", {
                 method: "POST",
@@ -55,20 +55,20 @@ const ProductForm = () => {
                 },
                 body: JSON.stringify(newProduct),
             });
-    
+
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.reply || "Error al registrar el producto");
             }
-    
+
             const responseData = await response.json();
-    
+
             if (responseData.error) {
                 throw new Error(`Error del servidor: ${responseData.reply}`);
             }
-    
+
             console.log("Producto registrado:", responseData.reply);
-    
+
             fetchProducts();
             handleFields();
         } catch (error) {
@@ -121,7 +121,8 @@ const ProductForm = () => {
                 });
 
                 if (!response.ok) {
-                    throw new Error("Error al eliminar el producto");
+                    const errorData = await response.json();
+                    throw new Error(errorData.reply || "Error al registrar el producto");
                 }
 
                 console.log("Producto eliminado:", id);
@@ -219,7 +220,7 @@ const ProductForm = () => {
                 >
                     Actualizar Producto
                 </Button>
-                
+
                 {/* Nuevo botón para limpiar los campos */}
                 <Box display="flex" justifyContent="flex-end" sx={{ marginTop: 2 }}>
                     <Button variant="outlined" color="secondary" onClick={handleFields}>
