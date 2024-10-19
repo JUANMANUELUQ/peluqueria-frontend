@@ -66,6 +66,8 @@
     font-family: "Bigshot One", serif;
     font-size: 20px;
     color: #fff7f7;
+    cursor: pointer;
+    transition: background-color 0.5s;
 }
 
 .registerButton:hover{

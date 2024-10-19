@@ -1,3 +1,13 @@
+@keyframes aparicionTexto1 {
+    from {color: transparent;}
+    to {color: white;}
+}
+
+.aparicionTexto {
+    animation-name: aparicionTexto1;
+    animation-duration: 4s;
+}
+
 .backL{
     display: flex;
 }

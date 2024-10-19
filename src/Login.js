@@ -16,6 +16,7 @@ const Login = () => {
         event.preventDefault();
 
         try {
+            alert(inputs.correo+"+"+inputs.contrasenia);
             const response = await fetch("http://localhost:8080/api/account/login", {
                 method: "POST",
                 headers: {

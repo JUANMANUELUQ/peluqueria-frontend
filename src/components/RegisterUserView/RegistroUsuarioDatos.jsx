@@ -17,24 +17,21 @@ function RegistroUsuarioDatos() {
 
         try {
             // Verificar si el cliente ya existe
-            const responseExist = await fetch("http://localhost:8080/api/account/exist", {
+            const responseExist = await fetch("http://localhost:8080/api/accounts/exist", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({
-                    name: inputs.nombre,
-                    email: inputs.correo,
-                }),
+                body: JSON.stringify({ email: inputs.correo }), // Enviar como objeto
             });
 
             const exists = await responseExist.json();
 
             if (exists) {
-                alert("Ya existe una cuenta con ese correo o nombre");
+                alert("Ya existe una cuenta con ese correo");
             } else {
                 // Si no existe, crear la nueva cuenta
-                const responseCreate = await fetch("http://localhost:8080/api/account/create", {
+                const responseCreate = await fetch("http://localhost:8080/api/accounts/create", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
