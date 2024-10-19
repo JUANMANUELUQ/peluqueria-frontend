@@ -1,0 +1,98 @@
+/* Contenedor principal centrado */
+.mainContainer {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+    background-color: #F5F5F5; /* Fondo claro */
+}
+
+/* Contenedor de contenido */
+.contentWrapper {
+    width: 60%; /* Ajusta el ancho según sea necesario */
+    background: linear-gradient(#FFFFFF, #E7E7E7);
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+/* Estilo para la entrada de búsqueda */
+.inputSearchBox {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.searchInput {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #717171;
+    font-family: "Abel", sans-serif;
+    font-size: 16px;
+}
+
+/* Estilo para la tabla de clientes */
+.tableContainer {
+    width: 100%;
+    max-width: 800px;
+    overflow-x: auto;
+    margin: 0 auto;
+}
+
+.clientTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "Abel", sans-serif;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.clientTable th, .clientTable td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.clientTable th {
+    background-color: #00328F;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.clientTable tr:hover {
+    background-color: #f1f1f1;
+    transition: background-color 0.3s;
+}
+
+.clientTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.noResults {
+    text-align: center;
+    padding: 20px;
+    color: #717171;
+    font-style: italic;
+}
+
+/* Adaptar para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .clientTable th, .clientTable td {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .searchInput {
+        width: 95%;
+    }
+
+    .contentWrapper {
+        width: 90%; /* Asegura que el contenedor ocupe casi todo el ancho en pantallas pequeñas */
+    }
+}
