@@ -24,6 +24,10 @@ const App = () => {
             sessionStorage.setItem('LoginEmpleado', "");
             sessionStorage.setItem('LoginEmpleado', "");
         }
+        if (sessionStorage.getItem('LoginAdmin') === null) {
+            sessionStorage.setItem('LoginAdmin', "");
+            sessionStorage.setItem('LoginAdmin', "");
+        }
     }, []);
   return (
       <Routes>
