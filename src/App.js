@@ -8,6 +8,8 @@ import EmpleadoIndex from "./EmpleadoIndex";
 import AdminIndex from "./AdminIndex";
 import ProductForm from "./components/RegisterProductView/ProductForm";
 import {RegistroUsuario} from "./pages/registerUser/RegistroUsuario";
+import {InicioSesion} from "./pages/login/InicioSesion";
+
 // Asegúrate de tener este componente
 
 const App = () => {
@@ -25,7 +27,8 @@ const App = () => {
   return (
       <Routes>
           {/* Rutas definidas sin anidación */}
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<InicioSesion />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/RegistroCuentaClientes" element={<RegistroCuentaClientes />} />
           <Route path="/RegistroUsuario" element={<RegistroUsuario />} />
           <Route path="/ClienteIndex" element={<ClienteIndex />} />

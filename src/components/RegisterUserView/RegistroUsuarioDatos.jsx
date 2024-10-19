@@ -108,7 +108,7 @@ function RegistroUsuarioDatos() {
                                 />
                             </div>
                             <input type="submit" className="registerButton" value="Registrarse"/>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            &nbsp;&nbsp;&nbsp;
                             <Link to="/" className="haveAnAccount">&iquest;Ya tienes cuenta?</Link>
                         </div>
 
