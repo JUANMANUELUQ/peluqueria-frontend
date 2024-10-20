@@ -24,7 +24,7 @@ function DataRegisterEmployee() {
             phone: phoneNumber,
             password: password,
             email: email,
-            accountType: "EMPLOYEE" // Especificar que se está creando una cuenta de empleado
+            accountType: "EMPLOYEE"
         };
 
         try {

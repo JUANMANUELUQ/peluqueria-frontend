@@ -10,6 +10,7 @@ import ProductForm from "./components/RegisterProductView/ProductForm";
 import {RegistroUsuario} from "./pages/registerUser/RegistroUsuario";
 import {InicioSesion} from "./pages/login/InicioSesion";
 import {RegisterEmployee} from "./pages/registerUser/RegisterEmployee";
+import AppointmentBooking from "./components/Reservation/AppointmentBooking";
 
 // Asegúrate de tener este componente
 
@@ -40,6 +41,7 @@ const App = () => {
           <Route path="/EmpleadoIndex" element={<EmpleadoIndex />} />
           <Route path="/AdminIndex" element={<AdminIndex />} />
           <Route path="/RegistroEmpleado" element={<RegisterEmployee />} />
+          <Route path="/RegistroCita" element={<AppointmentBooking />} />
           <Route path="/ProductForm" element={<ProductForm />} /> {/* Nueva ruta para ProductForm */}
       </Routes>
   );
