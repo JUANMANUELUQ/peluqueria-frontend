@@ -11,6 +11,9 @@ import {RegistroUsuario} from "./pages/registerUser/RegistroUsuario";
 import {InicioSesion} from "./pages/login/InicioSesion";
 import {RegisterEmployee} from "./pages/registerUser/RegisterEmployee";
 import AppointmentBooking from "./components/Reservation/AppointmentBooking";
+import './components/filtrarClientes/FliteredClient.css'
+import FilteredClient from "./components/filtrarClientes/FilteredClient";
+
 
 // Asegúrate de tener este componente
 
@@ -42,6 +45,7 @@ const App = () => {
           <Route path="/AdminIndex" element={<AdminIndex />} />
           <Route path="/RegistroEmpleado" element={<RegisterEmployee />} />
           <Route path="/RegistroCita" element={<AppointmentBooking />} />
+          <Route path="/FiltrarCitas" element={<FilteredClient />} />
           <Route path="/ProductForm" element={<ProductForm />} /> {/* Nueva ruta para ProductForm */}
       </Routes>
   );
