@@ -1,0 +1,35 @@
+.tab-navigation {
+    background-color: #f8f9fa; /* Fondo de la barra de navegación */
+    padding: 10px; /* Espacio alrededor del contenido */
+    border-bottom: 2px solid #ccc; /* Líneas de separación */
+}
+
+.tabs {
+    list-style-type: none; /* Eliminar los puntos de las listas */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Hace que los elementos sean horizontales */
+    justify-content: space-around; /* Distribuye los elementos horizontalmente */
+}
+
+.tabs li {
+    margin: 0 15px; /* Espaciado entre los elementos */
+}
+
+.tabs li a {
+    text-decoration: none; /* Eliminar el subrayado */
+    color: #00328F; /* Color de los enlaces */
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* Transición para el hover */
+}
+
+.tabs li a.active {
+    background-color: #00328F; /* Color de fondo cuando el enlace está activo */
+    color: white; /* Color de texto cuando está activo */
+}
+
+.tabs li a:hover {
+    background-color: #e0e0e0; /* Fondo al pasar el ratón */
+}
