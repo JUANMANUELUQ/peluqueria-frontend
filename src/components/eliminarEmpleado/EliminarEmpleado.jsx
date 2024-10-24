@@ -1,15 +1,49 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './EliminarEmpleado.css';
 
 function EliminarEmpleado() {
     // Estado para la búsqueda y lista de empleados
     const [searchTerm, setSearchTerm] = useState('');
-    const [clients, setClients] = useState([
-        { id: 1, name: 'John Doe', email: 'john@example.com', phone: '123-456-7890' },
-        { id: 2, name: 'Jane Smith', email: 'jane@example.com', phone: '987-654-3210' },
-        { id: 3, name: 'Michael Johnson', email: 'michael@example.com', phone: '456-789-1234' },
-        // Agrega más empleados según sea necesario
-    ]);
+    const [clients, setClients] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const fetchFilteredClients = async (search) => {
+        setLoading(true);
+        setError(null);
+        try {
+            const response = await fetch('http://localhost:8080/api/accounts/filterEmployee', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ search }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log(data); // Esto mostrará la respuesta en la consola
+
+            // Accede a 'reply' para obtener la lista de clientes
+            if (data && data.reply) {
+                setClients(data.reply); // Ahora configuramos clients con data.reply
+            } else {
+                setClients([]); // Vacía la lista si no hay resultados
+            }
+        } catch (error) {
+            console.error('Error fetching clients:', error);
+            setError(`Error fetching clients: ${error.message}`);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchFilteredClients(searchTerm);
+    }, [searchTerm]);
 
     // Filtrar empleados basado en el término de búsqueda
     const filteredClients = clients.filter(client =>
@@ -48,7 +82,7 @@ function EliminarEmpleado() {
                             </tr>
                             </thead>
                             <tbody>
-                            {filteredClients.map((client) => (
+                            {clients.map((client) => (
                                 <tr key={client.id}>
                                     <td>{client.name}</td>
                                     <td>{client.email}</td>
