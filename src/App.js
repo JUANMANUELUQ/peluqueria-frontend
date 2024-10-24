@@ -17,13 +17,13 @@
 **/
 import React from 'react';
 import './App.css'; // Importa tus estilos globales
-import './components/filtrarClientes/FliteredClient.css'
-import FilteredClient from './components/filtrarClientes/FilteredClient'; // Ajusta la ruta según tu estructura de proyecto
+import './components/cancelarCita/CancelarCitas.css'
+import CancelarCita from './components/cancelarCita/CancelarCita'; // Ajusta la ruta según tu estructura de proyecto
 
 function App() {
   return (
       <div className="App">
-        <FilteredClient />
+        <CancelarCita />
       </div>
   );
 }
