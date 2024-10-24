@@ -54,7 +54,7 @@ function LoginDatos() {
             if (account.accountType === "CLIENT") {
                 sessionStorage.setItem('LoginCliente', inputs.correo);
                 navigate("/ClienteIndex");
-            } else if (account.accountType === "WORKER") {
+            } else if (account.accountType === "EMPLOYEE") {
                 sessionStorage.setItem('LoginEmpleado', inputs.correo);
                 navigate("/EmpleadoIndex");
             } else if (account.accountType === "ADMIN") {

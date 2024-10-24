@@ -57,13 +57,17 @@ function RegistroUsuarioDatos() {
         }
     }
 
+    const myStyle = {
+        marginTop:"-60px",
+        marginLeft:0
+    };
 
     return (
         <form onSubmit={handleSubmit}>
             <div className="FondoB2">
                 <div className="FondoB21">
                     <body>
-                    <h2 className="titlePage3" style={{marginLeft:0}}>
+                    <h2 className="titlePage3" style={myStyle}>
                         <style>
                             @import url('https://fonts.googleapis.com/css2?family=Bigshot+One&display=swap');
                         </style>
