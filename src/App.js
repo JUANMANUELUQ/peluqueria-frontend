@@ -12,8 +12,9 @@ import AppointmentBooking from './components/Reservation/AppointmentBooking';
 import './components/filtrarClientes/FliteredClient.css';
 import FilteredClient from './components/filtrarClientes/FilteredClient';
 import './components/Bases/TabNavigation.css';
-import EliminarEmpleado from "./components/eliminarEmpleado/EliminarEmpleado";
+
 import CancelarCita from "./components/cancelarCita/CancelarCita";
+import EliminarEmpleado from "./components/eliminarEmpleado/EliminarEmpleado";
 
 const TabNavigation = () => {
     return (
