@@ -73,9 +73,10 @@ function LoginDatos() {
             <div className="FondoC2">
                 <div className="FondoC21">
                     <body>
-                    <h2 className="titlePage3">
+                    <h2 className="titlePage3" style={{marginLeft:0}}>
                         <style>
                             @import url('https://fonts.googleapis.com/css2?family=Bigshot+One&display=swap');
+
                         </style>
                         Inicio de sesi&oacute;n
                     </h2>
