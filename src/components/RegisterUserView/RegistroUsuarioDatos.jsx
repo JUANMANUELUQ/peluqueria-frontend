@@ -39,6 +39,7 @@ function RegistroUsuarioDatos() {
                     body: JSON.stringify({
                         name: inputs.nombre,
                         email: inputs.correo,
+                        phone: inputs.telefono,
                         password: inputs.contrasenia,
                     }),
                 });
@@ -91,6 +92,16 @@ function RegistroUsuarioDatos() {
                                     required="required"
                                     name="correo"
                                     value={inputs.correo}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="registerBox">
+                                <label className="phone">Telefono:</label>
+                                <input
+                                    type="text"
+                                    required="required"
+                                    name="telefono"
+                                    value={inputs.telefono}
                                     onChange={handleChange}
                                 />
                             </div>
