@@ -12,6 +12,8 @@ import AppointmentBooking from './components/Reservation/AppointmentBooking';
 import './components/filtrarClientes/FliteredClient.css';
 import FilteredClient from './components/filtrarClientes/FilteredClient';
 import './components/Bases/TabNavigation.css';
+import EliminarEmpleado from "./components/eliminarEmpleado/EliminarEmpleado";
+import CancelarCita from "./components/cancelarCita/CancelarCita";
 
 const TabNavigation = () => {
     return (
@@ -27,10 +29,16 @@ const TabNavigation = () => {
                     <NavLink to="/RegistroEmpleado">Registrar Empleados</NavLink>
                 </li>
                 <li>
+                    <NavLink to="/EliminarEmpleado">Eliminar empleado</NavLink>
+                </li>
+                <li>
                     <NavLink to="/ProductForm">Registrar Producto</NavLink>
                 </li>
                 <li>
                     <NavLink to="/RegistroCita">Registrar Cita</NavLink>
+                </li>
+                <li>
+                    <NavLink to="/CancelarCita">Cancelar cita</NavLink>
                 </li>
                 <li>
                     <NavLink to="/FiltrarCliente">Filtrar Clientes</NavLink>
@@ -69,7 +77,9 @@ const App = () => {
                 <Route path="/EmpleadoIndex" element={<EmpleadoIndex />} />
                 <Route path="/AdminIndex" element={<AdminIndex />} />
                 <Route path="/RegistroEmpleado" element={<RegisterEmployee />} />
+                <Route path="/EliminarEmpleado" element={<EliminarEmpleado/>} />
                 <Route path="/RegistroCita" element={<AppointmentBooking />} />
+                <Route path="/CancelarCita" element={<CancelarCita/>} />
                 <Route path="/FiltrarCliente" element={<FilteredClient />} />
                 <Route path="/ProductForm" element={<ProductForm />} />
                 {/* Ruta para manejar páginas no encontradas */}
