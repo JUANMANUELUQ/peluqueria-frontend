@@ -17,6 +17,7 @@ function CancelarCita() {
                     throw new Error(`Error ${response.status}: ${response.statusText}`);
                 }
                 const data = await response.json();
+                console.log(data)
                 setAppointments(data);
             } catch (error) {
                 setError(error.message);
@@ -91,7 +92,7 @@ function CancelarCita() {
                                     <td>{appointment.id}</td>
                                     <td>{appointment.date}</td>
                                     <td>{appointment.service}</td>
-                                    <td>{appointment.employee}</td>
+                                    <td>{appointment.employee ? appointment.employee.name : 'Sin asignar'}</td>
                                     <td>{appointment.price}</td>
                                     <td>
                                         <button
