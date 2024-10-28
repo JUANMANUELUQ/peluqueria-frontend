@@ -15,6 +15,7 @@ import './components/Bases/TabNavigation.css';
 
 import CancelarCita from "./components/cancelarCita/CancelarCita";
 import EliminarEmpleado from "./components/eliminarEmpleado/EliminarEmpleado";
+import {ActualizarCliente} from "./pages/ActualizarClientes/ActuaizarCliente";
 
 const TabNavigation = () => {
     return (
@@ -83,6 +84,7 @@ const App = () => {
                 <Route path="/CancelarCita" element={<CancelarCita/>} />
                 <Route path="/FiltrarCliente" element={<FilteredClient />} />
                 <Route path="/ProductForm" element={<ProductForm />} />
+                <Route path="/ActualizarCliente" element={<ActualizarCliente />} />
                 {/* Ruta para manejar páginas no encontradas */}
                 <Route path="*" element={<h2>Página no encontrada</h2>} />
             </Routes>
