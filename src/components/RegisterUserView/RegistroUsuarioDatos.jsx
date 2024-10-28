@@ -30,6 +30,19 @@ function RegistroUsuarioDatos() {
             if (exists) {
                 alert("Ya existe una cuenta con ese correo");
             } else {
+                const responseExistDni = await fetch("http://localhost:8080/api/accounts/existDni", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ dni: inputs.cedula }), // Enviar como objeto
+                });
+
+                const existsDni = await responseExistDni.json();
+
+                if (existsDni) {
+                    alert("Ya existe una cuenta con esa cedula");
+                } else {
                 // Si no existe, crear la nueva cuenta
                 const responseCreate = await fetch("http://localhost:8080/api/accounts/create", {
                     method: "POST",
@@ -41,6 +54,8 @@ function RegistroUsuarioDatos() {
                         email: inputs.correo,
                         phone: inputs.telefono,
                         password: inputs.contrasenia,
+                        dni: inputs.cedula,
+                        address: inputs.direccion
                     }),
                 });
 
@@ -50,6 +65,7 @@ function RegistroUsuarioDatos() {
                 } else {
                     alert("Error al crear la cuenta.");
                 }
+            }
             }
         } catch (error) {
             console.error("Error:", error);
@@ -65,8 +81,7 @@ function RegistroUsuarioDatos() {
     return (
         <form onSubmit={handleSubmit}>
             <div className="FondoB2">
-                <div className="FondoB21">
-                    <body>
+                <div className="FondoB22">
                     <h2 className="titlePage3" style={myStyle}>
                         <style>
                             @import url('https://fonts.googleapis.com/css2?family=Bigshot+One&display=swap');
@@ -100,16 +115,6 @@ function RegistroUsuarioDatos() {
                                 />
                             </div>
                             <div className="registerBox">
-                                <label className="phone">Telefono:</label>
-                                <input
-                                    type="text"
-                                    required="required"
-                                    name="telefono"
-                                    value={inputs.telefono}
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <div className="registerBox">
                                 <label className="password">Contrase&ntilde;a:</label>
                                 <input
                                     type="password"
@@ -123,10 +128,39 @@ function RegistroUsuarioDatos() {
                             &nbsp;&nbsp;&nbsp;
                             <Link to="/" className="haveAnAccount">&iquest;Ya tienes cuenta?</Link>
                         </div>
-
+                        <div className="boxR">
+                            <div className="registerBox">
+                                <label className="fullName">Cedula:</label>
+                                <input
+                                    type="text"
+                                    required="required"
+                                    name="cedula"
+                                    value={inputs.cedula}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="registerBox">
+                                <label className="phone">Telefono:</label>
+                                <input
+                                    type="tel"
+                                    required="required"
+                                    name="telefono"
+                                    value={inputs.telefono}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="registerBox">
+                                <label className="phone">Direcci&oacute;n:</label>
+                                <input
+                                    type="text"
+                                    required="required"
+                                    name="direccion"
+                                    value={inputs.direccion}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        </div>
                     </div>
-                    </body>
-
                 </div>
             </div>
         </form>
