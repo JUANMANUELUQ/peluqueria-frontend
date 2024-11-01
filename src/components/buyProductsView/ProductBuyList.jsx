@@ -1,8 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import "./buyProducts.css";
 
-const ProductBuyList = () => {
+const ProductBuyList = ({ allProducts, setAllProducts, countProducts, setCountProducts, total, setTotal }) => {
     const [products, setProducts] = useState([]);
+
+    const onAddProduct = product => {
+        if (allProducts.find(item => item.id === product.id)) {
+            const updatedProducts = allProducts.map(item =>
+                item.id === product.id
+                    ? { ...item, cartQuantity: item.cartQuantity + 1 }
+                    : item
+            );
+            setTotal(total + product.unitPrice);
+            setCountProducts(countProducts + 1);
+            return setAllProducts(updatedProducts);
+        }
+
+        setTotal(total + product.unitPrice);
+        setCountProducts(countProducts + 1);
+        setAllProducts([...allProducts, { ...product, cartQuantity: 1 }]);
+    };
 
     const fetchProducts = async () => {
         try {
@@ -11,13 +28,7 @@ const ProductBuyList = () => {
                 throw new Error("Error al obtener los productos");
             }
             const responseData = await response.json();
-    
-            if (responseData.error) {
-                throw new Error("Error del servidor al obtener los productos");
-            }
-    
             const products = responseData.reply || [];
-            console.log("Productos obtenidos:", products);
             setProducts(products);
         } catch (error) {
             console.error("Error:", error);
@@ -32,12 +43,14 @@ const ProductBuyList = () => {
     return (
         <div className="container-items">
             {products.map(product => (
-                <div className="item">
+                <div className="item" key={product.id}>
                     <div className="info-product">
-                    <h2>{product.productName}</h2>
-					<p className="price">{product.unitPrice}</p>
-                    <p className="cantidad">{product.quantity}</p>
-					<button className="btn-add-cart">Añadir al carrito</button>
+                        <h2>{product.productName}</h2>
+                        <p className="price">${product.unitPrice}</p>
+                        <p className="quantity">Stock: {product.quantity}</p>
+                        <button onClick={() => onAddProduct(product)} className="btn-add-cart">
+                            Añadir al carrito
+                        </button>
                     </div>
                 </div>
             ))}
