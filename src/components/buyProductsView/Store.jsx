@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import HeaderProducts from './HeaderProducts';
+import {HeaderProducts} from './HeaderProducts';
 import ProductBuyList from './ProductBuyList';
 
 const Store = () => {

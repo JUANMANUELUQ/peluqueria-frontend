@@ -1,31 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 
-export const HeaderProducts = ({ allProducts, setAllProducts, total, countProducts, setCountProducts, setTotal }) => {
+export const HeaderProducts = ({ allProducts, setAllProducts, total, countProducts, setCountProducts, setTotal, client, setClient }) => {
     const [active, setActive] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
+    const cartRef = useRef(null);
 
-    // Búsqueda en el backend cada vez que cambia el término de búsqueda
+    useEffect(() => {
+        fetchProducts();
+    }, []);
+
+    // Función para buscar productos utilizando la API
+    const fetchProducts = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8080/api/products/get-all`);
+            setSearchResults(response.data);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+            setSearchResults([]);
+        }
+    };
+
     useEffect(() => {
         if (searchTerm) {
-            const searchProducts = async () => {
-                try {
-                    const response = await fetch(`http://localhost:8080/api/products/search?query=${searchTerm}`);
-                    if (!response.ok) {
-                        throw new Error('Error en la búsqueda de productos');
-                    }
-                    const data = await response.json();
-                    setSearchResults(data.reply || []);
-                } catch (error) {
-                    console.error("Error al buscar productos:", error);
-                    setSearchResults([]);
-                }
-            };
-            searchProducts();
+            const filteredProducts = searchResults.filter(product =>
+                product.productName.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            setSearchResults(filteredProducts);
         } else {
-            setSearchResults([]); // Limpiar resultados si no hay término de búsqueda
+            setSearchResults([]);
         }
-    }, [searchTerm]);
+    }, [searchTerm, searchResults]);
 
     const onDeleteProduct = (product) => {
         if (product.cartQuantity > 1) {
@@ -50,7 +56,6 @@ export const HeaderProducts = ({ allProducts, setAllProducts, total, countProduc
     };
 
     const onAddProductFromSearch = (product) => {
-        // Similar lógica que el método en ProductBuyList
         if (allProducts.find(item => item.id === product.id)) {
             const updatedProducts = allProducts.map(item =>
                 item.id === product.id
@@ -65,21 +70,55 @@ export const HeaderProducts = ({ allProducts, setAllProducts, total, countProduc
         setTotal(total + product.unitPrice);
         setCountProducts(countProducts + 1);
         setAllProducts([...allProducts, { ...product, cartQuantity: 1 }]);
-        setSearchTerm(''); // Limpiar el campo de búsqueda después de añadir el producto
+        setSearchTerm('');
         setSearchResults([]);
+    };
+
+    // Método para realizar el pago de todos los productos
+    const onPayAll = async () => {
+        const saleData = {
+            clientEmail: client.clientEmail,
+            products: allProducts.map(product => ({
+                id: product.id,
+                productName: product.productName,
+                quantity: product.cartQuantity,
+                unitPrice: product.unitPrice,
+            })),
+        };
+
+        try {
+            const response = await fetch("http://localhost:8080/sale/create-sale", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(saleData),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.reply || "Error al realizar la compra");
+            }
+
+            const responseData = await response.json();
+
+            if (responseData.error) {
+                throw new Error(`Error del servidor: ${responseData.reply}`);
+            }
+
+            console.log("Compra realizada:", responseData.reply);
+
+            onCleanCart(); // Limpiar carrito después del pago
+            fetchProducts();
+        } catch (error) {
+            console.error("Error:", error);
+        }
     };
 
     return (
         <header>
-            <h1>Tienda</h1>
+            <h1 style={{ textAlign: 'center' }}>Tienda Peluqueria UQ</h1>
             
-            <input 
-                type="text" 
-                value={searchTerm} 
-                onChange={(e) => setSearchTerm(e.target.value)} 
-                placeholder="Buscar productos..." 
-            />
-
             {searchResults.length > 0 && (
                 <div className="search-results">
                     {searchResults.map((product) => (
@@ -104,7 +143,7 @@ export const HeaderProducts = ({ allProducts, setAllProducts, total, countProduc
                     </div>
                 </div>
 
-                <div className={`container-cart-products ${active ? '' : "hidden-cart"}`}>
+                <div ref={cartRef} className={`container-cart-products ${active ? '' : "hidden-cart"}`}>
                     {allProducts.length ? (
                         <>
                             <div className="row-product">
@@ -132,8 +171,19 @@ export const HeaderProducts = ({ allProducts, setAllProducts, total, countProduc
                                 <h3>Total:</h3>
                                 <span className="total-pagar">${total}</span>
                             </div>
-                            <button className="btn-clear-all" onClick={onCleanCart}>
+                            <button className="btn-clear-all" onClick={() => {
+                                if (window.confirm("¿Está seguro de que desea vaciar el carrito?")) {
+                                    onCleanCart();
+                                }
+                            }}>
                                 Vaciar Carrito
+                            </button>
+                            <button className="btn-pay-all" onClick={() => {
+                                if (window.confirm("¿Desea proceder con el pago de todos los productos en el carrito?")) {
+                                    onPayAll();
+                                }
+                            }}>
+                                Pagar Todo
                             </button>
                         </>
                     ) : (

@@ -139,14 +139,18 @@ header{
 
 
 /* Main */
-.container-items{
+/* Asegúrate de que el contenedor de los productos use el ancho completo */
+.container-items {
+    margin-left: 150px; /* Deja espacio suficiente para los filtros a la izquierda */
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Permitir que los elementos se ajusten mejor */
+    gap: 20px; /* Espacio entre productos */
+    width: 100%; /* Asegúrate de que el contenedor ocupe todo el ancho */
 }
 
-.item{
+.item {
     border-radius: 10px;
+    overflow: hidden; /* Asegúrate de que las esquinas redondeadas se mantengan */
 }
 
 .item:hover{
@@ -194,6 +198,7 @@ header{
     color: #fff;
     padding: 15px 10px;
     cursor: pointer;
+    width: 100%; /* Botón ocupa el ancho completo */
 }
 
 .cart-empty{
@@ -227,4 +232,107 @@ header{
     background-color: #333;
     transform: scale(1.03);
     border-radius: 0;
+}
+
+.btn-pay-all {
+    border: none;
+    background-color: #28a745;
+    color: #fff;
+    padding: 15px 0;
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-family: inherit;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all .3s ease;
+}
+
+.btn-pay-all:hover {
+    background-color: #218838;
+    transform: scale(1.03);
+    border-radius: 0;
+}
+
+.sold-out {
+    color: red; /* Cambia el color del texto a rojo */
+    font-weight: bold; /* Haz que el texto sea más audaz */
+}
+
+.combo-box {
+    margin-bottom: 20px; /* Espacio entre el comboBox y la lista de productos */
+    padding: 10px; /* Espaciado interno del comboBox */
+    font-size: 16px; /* Tamaño de la fuente */
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #ccc; /* Borde gris claro */
+    width: 100%; /* Que ocupe el ancho completo del contenedor */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.container {
+    margin: 20px; /* Margen alrededor del contenedor */
+    max-width: 1200px; /* Limita el ancho máximo */
+    width: 100%; /* Asegura que el contenedor use el ancho completo */
+}
+
+.filters {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    position: absolute;
+    left: 10px; /* Ajusta este valor según necesites */
+    gap: 20px; /* Espacio entre cada filtro */
+}
+
+.filters > * {
+    font-size: 0.001rem; /* Tamaño de fuente mucho más pequeño */
+    width: 180px; /* Ajusta el ancho de los filtros */
+    margin-bottom: 10px; /* Espacio adicional debajo de cada filtro */
+}
+
+.filters label {
+    margin-bottom: 5px; /* Espacio entre el label y el filtro */
+    font-size: 0.65rem; /* Tamaño de fuente del label */
+    display: block; /* Asegura que el label ocupe el ancho completo */
+}
+
+/* Asegúrate de que los TextField tengan un margen superior para que el label esté más cerca */
+.filters .MuiTextField-root {
+    margin-top: 0; /* Sin margen superior para alinear el label */
+    font-size: 0.8rem; /* Tamaño de fuente pequeño */
+    width: 200px; /* Ancho del filtro */
+}
+
+.filters label, /* Para el texto de los labels */
+.filters input, /* Para el texto de los inputs */
+.filters .MuiSelect-root { /* Para el texto de los select */
+    font-size: 0.65rem;
+}
+
+.clear-filters-btn {
+    background-color: #3590F3; /* Color de fondo */
+    color: #FFFFFF; /* Color del texto */
+    padding: 8px 16px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor de mano */
+    font-size: 14px; /* Tamaño de letra */
+    font-weight: bold; /* Texto en negrita */
+    transition: background-color 0.3s ease; /* Efecto de transición */
+    margin-top: 10px; /* Separación superior */
+}
+
+.clear-filters-btn:hover {
+    background-color: #2671c3; /* Color de fondo al pasar el cursor */
+}
+
+.no-products-message {
+    font-size: 1.5rem; /* Aumenta el tamaño de la fuente */
+    font-weight: bold; /* Hace que el texto sea en negrita */
+    color: #000; /* Puedes cambiar el color si deseas */
+    text-align: center; /* Centra el texto */
+    margin-top: 10px; /* Espacio superior para separar del resto del contenido */
 }
