@@ -5,73 +5,154 @@
 
 .BackgroundB2 {
     width: 50%;
-    height: 100vh;
+    min-height: 100vh;
     background: linear-gradient(#FFFFFF, #E7E7E7);
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 20px;
 }
 
 .BackgroundB21 {
     width: 90%;
-    height: auto;
     background: linear-gradient(#F7F7F7, #F5F5F5);
-    margin: 70px;
-    padding: 20px;
-    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2);
+    padding: 30px 20px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
 
 .titlePage3 {
     font-family: "Bigshot One", serif;
     font-weight: 400;
-    font-size: 27px;
+    font-size: 28px;
     text-align: center;
     color: #000000;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .inputRegisterBox {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+    margin-bottom: 20px;
 }
 
 .registerBox {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
+    gap: 8px;
 }
 
 .label {
     font-family: "Abel", sans-serif;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 18px;
+    color: #333;
 }
 
 input, select {
     border-radius: 5px;
     border: 1px solid #717171;
-    height: 32px;
+    height: 35px;
     width: 100%;
     padding: 5px;
+    font-size: 16px;
+    font-family: "Abel", sans-serif;
 }
 
 .registerButton {
     width: 100%;
-    height: 40px;
+    height: 45px;
     margin-top: 20px;
     border-radius: 5px;
     border-width: 0;
     background-color: #002D81;
     font-family: "Bigshot One", serif;
     font-size: 20px;
-    color: #fff7f7;
+    color: #FFFFFF;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .registerButton:hover {
     background-color: #0741AD;
-    animation: ease-in-out;
+}
+
+.searchBox {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.searchInput {
+    flex-grow: 1;
+    height: 35px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #717171;
+    font-size: 16px;
+    font-family: "Abel", sans-serif;
+}
+
+.searchButton {
+    height: 35px;
+    padding: 0 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0741AD;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.searchButton:hover {
+    background-color: #002D81;
+}
+
+.tableContainer {
+    margin-top: 20px;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+}
+
+.clientTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "Abel", sans-serif;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+}
+
+th {
+    background-color: #002D81;
+    color: white;
+    font-weight: normal;
+}
+
+tr:hover {
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+
+.noResults {
+    text-align: center;
+    padding: 15px;
+    font-size: 16px;
+    color: #666;
+    font-family: "Abel", sans-serif;
+}
+
+.loading, .error {
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
+    font-family: "Abel", sans-serif;
+    color: #FF0000;
 }
