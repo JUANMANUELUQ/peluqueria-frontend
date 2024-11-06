@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { HeaderProducts } from './HeaderProducts';
 import ProductBuyList from './ProductBuyList';
+import axios from 'axios';
 
 const Store = () => {
   const [allProducts, setAllProducts] = useState([]);
