@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { Link,useNavigate } from "react-router-dom";
 
-export const HeaderProducts = ({ allProducts, setAllProducts, total, countProducts, setCountProducts, setTotal, client, setClient, }) => {
+export const HeaderProducts = ({ allProducts, setAllProducts, total, countProducts, setCountProducts, setTotal, client, setClient }) => {
     const [active, setActive] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [allFetchedProducts, setAllFetchedProducts] = useState([]); // Almacena todos los productos obtenidos de la API
     const cartRef = useRef(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchProducts();
@@ -16,8 +18,7 @@ export const HeaderProducts = ({ allProducts, setAllProducts, total, countProduc
     const fetchProducts = async () => {
         try {
             const response = await axios.get(`http://localhost:8080/api/products/get-all`);
-            console.log(response.data.reply);
-            setAllProducts(response.data.reply); // Almacena todos los productos aquí
+            setAllFetchedProducts(response.data); // Almacena todos los productos aquí
         } catch (error) {
             console.error('Error fetching products:', error);
             setAllFetchedProducts([]);
@@ -122,7 +123,7 @@ export const HeaderProducts = ({ allProducts, setAllProducts, total, countProduc
     
             onCleanCart();
             console.log ("hollaalalal"); // Limpiar carrito después del pago
-            fetchProducts();
+            window.location.reload();
         } catch (error) {
             console.error("Error:", error);
         }
