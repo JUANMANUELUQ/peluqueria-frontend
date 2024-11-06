@@ -5,6 +5,7 @@ export const HeaderProducts = ({ allProducts, setAllProducts, total, countProduc
     const [active, setActive] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
+    const [allFetchedProducts, setAllFetchedProducts] = useState([]); // Almacena todos los productos obtenidos de la API
     const cartRef = useRef(null);
 
     useEffect(() => {
@@ -15,23 +16,27 @@ export const HeaderProducts = ({ allProducts, setAllProducts, total, countProduc
     const fetchProducts = async () => {
         try {
             const response = await axios.get(`http://localhost:8080/api/products/get-all`);
-            setSearchResults(response.data);
+            console.log(response.data.reply);
+            setAllProducts(response.data.reply); // Almacena todos los productos aquí
         } catch (error) {
             console.error('Error fetching products:', error);
-            setSearchResults([]);
+            setAllFetchedProducts([]);
         }
     };
 
     useEffect(() => {
         if (searchTerm) {
-            const filteredProducts = searchResults.filter(product =>
+            const filteredProducts = allFetchedProducts.filter(product =>
                 product.productName.toLowerCase().includes(searchTerm.toLowerCase())
             );
             setSearchResults(filteredProducts);
         } else {
             setSearchResults([]);
         }
-    }, [searchTerm, searchResults]);
+    }, [searchTerm, allFetchedProducts]); // Cambiamos la dependencia a allFetchedProducts en lugar de searchResults
+
+    // Resto del código (sin cambios)
+
 
     const onDeleteProduct = (product) => {
         if (product.cartQuantity > 1) {
@@ -76,8 +81,15 @@ export const HeaderProducts = ({ allProducts, setAllProducts, total, countProduc
 
     // Método para realizar el pago de todos los productos
     const onPayAll = async () => {
+        const clientEmail = sessionStorage.getItem("LoginCliente");
+        
+        if (!clientEmail) {
+            console.error("Error: El email del cliente no está disponible en sessionStorage.");
+            return;
+        }
+    
         const saleData = {
-            clientEmail: client.clientEmail,
+            clientEmail: clientEmail,
             products: allProducts.map(product => ({
                 id: product.id,
                 productName: product.productName,
@@ -85,30 +97,31 @@ export const HeaderProducts = ({ allProducts, setAllProducts, total, countProduc
                 unitPrice: product.unitPrice,
             })),
         };
-
+    
         try {
-            const response = await fetch("http://localhost:8080/sale/create-sale", {
+            const response = await fetch("http://localhost:8080/api/product-sale/create-sale", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(saleData),
             });
-
+    
             if (!response.ok) {
                 const errorData = await response.json();
                 throw new Error(errorData.reply || "Error al realizar la compra");
             }
-
+    
             const responseData = await response.json();
-
+    
             if (responseData.error) {
                 throw new Error(`Error del servidor: ${responseData.reply}`);
             }
-
+    
             console.log("Compra realizada:", responseData.reply);
-
-            onCleanCart(); // Limpiar carrito después del pago
+    
+            onCleanCart();
+            console.log ("hollaalalal"); // Limpiar carrito después del pago
             fetchProducts();
         } catch (error) {
             console.error("Error:", error);
