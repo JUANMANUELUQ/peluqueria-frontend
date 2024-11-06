@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
-export const HeaderProducts = ({ allProducts, setAllProducts, total, countProducts, setCountProducts, setTotal, client, setClient }) => {
+export const HeaderProducts = ({ allProducts, setAllProducts, total, countProducts, setCountProducts, setTotal, client, setClient, fetchProducts }) => {
     const [active, setActive] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
@@ -13,7 +13,7 @@ export const HeaderProducts = ({ allProducts, setAllProducts, total, countProduc
     }, []);
 
     // Función para buscar productos utilizando la API
-    const fetchProducts = async () => {
+    /*const fetchProducts = async () => {
         try {
             const response = await axios.get(`http://localhost:8080/api/products/get-all`);
             console.log(response.data.reply);
@@ -22,7 +22,7 @@ export const HeaderProducts = ({ allProducts, setAllProducts, total, countProduc
             console.error('Error fetching products:', error);
             setAllFetchedProducts([]);
         }
-    };
+    };*/
 
     useEffect(() => {
         if (searchTerm) {
@@ -122,7 +122,7 @@ export const HeaderProducts = ({ allProducts, setAllProducts, total, countProduc
     
             onCleanCart();
             console.log ("hollaalalal"); // Limpiar carrito después del pago
-            fetchProducts();
+            fetchProducts;
         } catch (error) {
             console.error("Error:", error);
         }
