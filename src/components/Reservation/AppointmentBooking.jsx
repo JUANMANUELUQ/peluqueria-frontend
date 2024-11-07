@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './AppointmentBooking.css';
+import {useNavigate} from "react-router-dom";
 
 function AppointmentBooking() {
     const [selectedDate, setSelectedDate] = useState('');
@@ -10,6 +11,14 @@ function AppointmentBooking() {
     const [price, setPrice] = useState(0);
     const [appointments, setAppointments] = useState([]); // Estado para las citas filtradas
     const services = ['Corte de cabello', 'Tinte', 'Manicure', 'Pedicure', 'Tratamiento capilar'];
+    const loginCliente = sessionStorage.getItem('LoginCliente');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (loginCliente == "") {
+            navigate("/");  // Redirige a la página raíz si no se ha iniciado sesión
+        }
+    }, [loginCliente, navigate]);
 
     const handleDateChange = (event) => {
         setSelectedDate(event.target.value);
@@ -143,7 +152,7 @@ function AppointmentBooking() {
                             </div>
                         </div>
                     </div>
-                    <button className="registerButton">Reservar Cita</button>
+                    <button className="registerButton" onClick={handleSubmit}>Reservar Cita</button>
 
                     {/* Barra de búsqueda y tabla de resultados */}
                     <div className="searchBox">

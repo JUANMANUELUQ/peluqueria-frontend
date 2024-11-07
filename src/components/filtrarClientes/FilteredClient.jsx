@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './FliteredClient.css';
+import {useNavigate} from "react-router-dom";
 
 function FilteredClient() {
     // Estados para la búsqueda, lista de clientes, estado de carga y posibles errores
@@ -7,6 +8,14 @@ function FilteredClient() {
     const [clients, setClients] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const loginEmpleado = sessionStorage.getItem('LoginEmpleado');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (loginEmpleado === "") {
+            navigate("/");  // Redirige a la página raíz si no se ha iniciado sesión
+        }
+    }, [loginEmpleado, navigate]);
 
     // Función para obtener clientes filtrados o todos si no hay búsqueda
     const fetchFilteredClients = async (search = '') => {

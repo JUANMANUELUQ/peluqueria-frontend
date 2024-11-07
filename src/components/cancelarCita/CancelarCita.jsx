@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './CancelarCitas.css';
+import {useNavigate} from "react-router-dom";
 
 function CancelarCita() {
     // Estado para la búsqueda y lista de citas
@@ -7,9 +8,14 @@ function CancelarCita() {
     const [appointments, setAppointments] = useState([]);
     const [loading, setLoading] = useState(true); // Estado para manejar la carga
     const [error, setError] = useState(null); // Estado para manejar errores
+    const loginCliente = sessionStorage.getItem('LoginCliente');
+    const navigate = useNavigate();
 
     // useEffect para cargar las citas desde el backend
     useEffect(() => {
+        if (loginCliente === "") {
+            navigate("/");  // Redirige a la página raíz si no se ha iniciado sesión
+        }
         const fetchAppointments = async () => {
             try {
                 const response = await fetch('/api/appointment/list');
@@ -27,7 +33,7 @@ function CancelarCita() {
         };
 
         fetchAppointments();
-    }, []);
+    }, [loginCliente, navigate]);
 
 
     // Filtrar citas basado en el término de búsqueda (ID de la cita)

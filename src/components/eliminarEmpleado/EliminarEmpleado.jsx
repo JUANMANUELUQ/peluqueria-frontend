@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './EliminarEmpleado.css';
+import {useNavigate} from "react-router-dom";
 
 function EliminarEmpleado() {
     // Estado para la búsqueda y lista de empleados
@@ -7,6 +8,14 @@ function EliminarEmpleado() {
     const [clients, setClients] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const loginCliente = sessionStorage.getItem('LoginAdmin');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (loginCliente == "") {
+            navigate("/");  // Redirige a la página raíz si no se ha iniciado sesión
+        }
+    }, [loginCliente, navigate]);
 
     const fetchFilteredClients = async (search) => {
         setLoading(true);

@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './EmployeeData.css';
+import {useNavigate} from "react-router-dom";
 
 function DataRegisterEmployee() {
     const [fullName, setFullName] = useState('');
@@ -8,6 +9,14 @@ function DataRegisterEmployee() {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const loginCliente = sessionStorage.getItem('LoginAdmin');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (loginCliente == "") {
+            navigate("/");  // Redirige a la página raíz si no se ha iniciado sesión
+        }
+    }, [loginCliente, navigate]);
 
     async function handleSubmit() {
         // Validación de los datos del formulario antes de enviar

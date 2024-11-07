@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TextField, Button, Box, Typography, InputLabel, InputAdornment, IconButton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Link } from "@mui/material";
 import { Add, Remove } from '@mui/icons-material';
 import './ProductForm.css';
+import {useNavigate} from "react-router-dom";
 
 const ProductForm = () => {
     const [id, setId] = useState("");
@@ -11,6 +12,14 @@ const ProductForm = () => {
     const [products, setProducts] = useState([]);
     const [selectedProductIndex, setSelectedProductIndex] = useState(null);
     const [isEditMode, setIsEditMode] = useState(false); // Nuevo estado para verificar si es modo edición
+    const loginEmpleado = sessionStorage.getItem('LoginEmpleado');
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (loginEmpleado === "") {
+            navigate("/");  // Redirige a la página raíz si no se ha iniciado sesión
+        }
+    }, [loginEmpleado, navigate]);
 
     // Función para obtener los productos desde el backend
     const fetchProducts = async () => {

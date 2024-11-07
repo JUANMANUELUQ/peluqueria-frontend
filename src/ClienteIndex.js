@@ -19,7 +19,8 @@ const ClienteIndex = () => {
     return (
         <>
             Cliente({loginCliente})<br/>
-            <Link to="/ActualizarCliente">ActualizarCliente</Link><br/>
+            <Link to="/ActualizarCliente">ActualizarCliente</Link><br/><br/>
+            <Link to="/CompraProductos">Comprar productos</Link><br/><br/>
             <Link to="/" onClick={handleLogout}>Cerrar sesi&oacute;n</Link>
         </>
     );
